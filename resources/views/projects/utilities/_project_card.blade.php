@@ -22,7 +22,7 @@
 		<a href="" class="btn btn-outline-dark btn-sm mb-3">Crear Tarea</a>
 
 		@foreach($project->tasks as $task)
-			<p class="mb-0">{{ $task->title }}</p>
+			<p class="mb-0">{{ $task->name }}</p>
 			<p>Terminar para: {{ $task->deadline }}</p>
 		@endforeach
 		<hr>

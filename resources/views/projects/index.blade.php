@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12 text-right">
-			<a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalProyectos">Crear Nuevo Proyecto</a>
+			<a href="{{ route('proyectos.create') }}" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalProyectos">Crear Nuevo Proyecto</a>
 		</div>
 	</div>
 

@@ -16,7 +16,7 @@ class ProjectController extends Controller
 
     public function create()
     {
-        //
+        return view('projects.create');
     }
 
     public function store(Request $request)
@@ -26,7 +26,7 @@ class ProjectController extends Controller
 
         $project->name = $request->name;
         $project->description = $request->description;
-        $task->deadline = $request->deadline;
+        $project->deadline = $request->deadline;
         $project->status = $request->status;
 
         $project->save();
@@ -41,12 +41,27 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        //
+        $task = Project::find($id);
+
+        Session::flash('info', 'Estas en la vista de editar cadete. Ten cuidado con lo que haces ya que no se puede modificar.');
+
+        return view('proyecto.edit')->with('project', $task);
     }
 
     public function update(Request $request, $id)
     {
-        //
+        $project = Project::find($id);
+
+        $project->name = $request->name;
+        $project->deadline = $request->deadline;
+        $project->description = $request->description;
+        $project->status = $request->status;
+
+        $project->save();
+
+        Session::flash('info', 'Tu proyecto fue editado correctamente. Un teniente se reportara contigo para confirmar el cambio');
+
+        return redirect()->route('proyectos.index');
     }
     public function destroy($id)
     {

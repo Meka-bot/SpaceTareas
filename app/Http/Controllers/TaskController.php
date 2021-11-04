@@ -19,6 +19,7 @@ class TaskController extends Controller
         $tasks = Task::all();
 
         return view('tasks.index')->with('tasks', $tasks);
+
     }
 
     public function create()
@@ -33,7 +34,7 @@ class TaskController extends Controller
         $task->name = $request->name;
         $task->deadline = $request->deadline;
         $task->description = $request->description;
-        $task->status = $task->status;
+        $task->status = $request->status;
 
         $task->save();
 
@@ -51,6 +52,8 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
 
+
+
         Session::flash('info', 'Estas en la vista de editar cadete. Ten cuidado con lo que haces ya que no se puede modificar.');
 
         return view('tasks.edit')->with('task', $task);
@@ -60,9 +63,10 @@ class TaskController extends Controller
     {
         $task = Task::find($id);
 
-        $task->title = $request->title;
+        $task->name = $request->name;
         $task->deadline = $request->deadline;
         $task->description = $request->description;
+        $project->status = $request->status;
 
         $task->save();
 
