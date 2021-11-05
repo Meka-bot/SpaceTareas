@@ -31,8 +31,8 @@
     <div id="app">
         <nav style="background-color:rgb(26, 17, 46, 1);" class="navbar navbar-expand-md shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}" style="color:rgb(237,95,74,255)">
-                    {{ config('app.name', 'Laravel') }}
+                <<a class="navbar-brand" href="{{ url('/') }}" style="color:rgb(237,95,74,255)">
+                    StarTasks
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -50,6 +50,7 @@
                         <li class="nav-item">
                             <a style="color:rgb(237,95,74,255)" class="nav-link" href="{{ route('tareas.index') }}">Tareas</a>
                         </li>
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->

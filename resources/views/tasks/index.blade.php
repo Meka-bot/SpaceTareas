@@ -18,6 +18,7 @@
                           <th scope="col">Titulo</th>
                           <th scope="col">Fecha de Entrega</th>
                           <th scope="col">Descripción</th>
+                          <th scope="col">Proyecto</th>
                           <th scope="col">Estado</th>
                           <th scope="col">Acciones</th>
                         </tr>
@@ -26,10 +27,11 @@
                         @foreach($tasks as $task)
                           <tr>
                             <th scope="row">{{ $task->id }}</th>
+                            <td>{{ $task->project_id }}</td>
                             <td>{{ $task->name }}</td>
                             <td>{{ $task->deadline }}</td>
                             <td>{{ $task->description }}</td>
-                            <td>
+                            <td scope="col">
                               @if($task->status == 'En Proceso')
                               <span class="badge badge-secondary">En Proceso</span>
                               @endif
@@ -43,7 +45,7 @@
                               <span class="badge badge-dark">Cancelado</span>
                               @endif
                             </td>
-                            <td>
+                            <td class="">
                               <a href="{{ route('tareas.edit', $task->id) }}" class="btn btn-outline-info btn-sm" data-toggle="tooltip" data-placement="top" title="Editar">Editar<ion-icon name="create-outline"></ion-icon></a>
 
                               <form method="POST" style="display: inline-block;" action="{{ route('tareas.destroy', $task->id) }}">

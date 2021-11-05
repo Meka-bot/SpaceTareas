@@ -12,6 +12,16 @@ class Task extends Model
     public function project()
     {
         return $this->belongsTo(Project::class);
+        return $this->hasMany(Project::class, 'id');
+
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+
+       $user_id = User::find($id);
+    }
+
 
 }

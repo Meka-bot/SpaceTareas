@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 	<div class="row">
-		<div class="col-md-12 text-right">
+		<div class="col-md-12 text-left">
 			<a href="{{ route('proyectos.create') }}" class="btn btn-outline-primary" data-toggle="modal" data-target="#modalProyectos">Crear Nuevo Proyecto</a>
 		</div>
 	</div>
@@ -21,6 +21,6 @@
 	</div>
 </div>
 
-@include('projects.utilities._create_project_modal')
+
 
 @endsection

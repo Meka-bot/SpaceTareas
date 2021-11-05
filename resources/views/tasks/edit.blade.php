@@ -12,20 +12,38 @@
     					{{ csrf_field() }}
     					{{ method_field('PUT') }}
     					
+							
     					<div class="form-group">
     						<label>Titulo de Tarea</label>
-    						<input type="text" name="name" class="form-control" value="{{ $task->title }}" required="">
+    						<input type="text" name="name" class="form-control" required="">
     					</div>
 
-    					<div class="form-group">
+						<div class="form-group">
+    						<label>Vincular Proyecto</label>
+							<select class="form-control" id="exampleFormControlSelect1" name="project_id">
+				    		@foreach($projects as $project)
+				      		<option value="{{ $project->id }}">{{ $project->name }}</option>
+				        	@endforeach
+				    	</select>
+    					</div>
+
+						<div class="form-group">
     						<label>Fecha de Entrega</label>
-    						<input type="date" name="deadline" value="{{ $task->deadline }}" class="form-control">
+    						<input type="date" name="deadline" class="form-control">
     					</div>
 
     					<div class="form-group">
     						<label>Descripción</label>
-    						<textarea class="form-control" name="description" rows="5">{{ $task->description }}</textarea>
+    						<textarea class="form-control" name="description" rows="5"></textarea>
     					</div>
+
+						<div class="form-group">
+				    	<label for="exampleFormControlSelect1">Soldados asignados a la tarea</label>
+				    	<select class="form-control" id="exampleFormControlSelect1" name="user_id" multipple="">
+				    	@foreach($users as $user)
+				     	 <option value="{{ $user->id }}">{{ $user->name }}</option>
+				        @endforeach
+				    	</select>
 
 						<div class="form-group">
 	      				<label>Estado</label>

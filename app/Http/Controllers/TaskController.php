@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Session; 
 
 use App\Models\Task;
+use App\Models\User;
+use App\Models\Project;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -18,29 +20,46 @@ class TaskController extends Controller
     {
         $tasks = Task::all();
 
-        return view('tasks.index')->with('tasks', $tasks);
+        $users = User::all();
+
+        $projects = Project::all();
+
+        return view('tasks.index')->with('tasks', $tasks)->with('users', $users)->with('projects', $projects);
 
     }
 
     public function create()
     {
-        return view('tasks.create');
+        $projects = Project::all();
+
+        $users = User::all();
+
+        return view('tasks.create')->with('users', $users)->with('projects', $projects);
     }
 
     public function store(Request $request)
     {
         $task = new Task;
+        $projects = Project::all();
 
         $task->name = $request->name;
         $task->deadline = $request->deadline;
         $task->description = $request->description;
         $task->status = $request->status;
+        $task->project_id = $request->project_id;
+        $task->user_id = $request->user_id;
 
         $task->save();
 
+        $users = User::all();
+
        // Session::flash('exito', 'Se guardó correctamente tu tarea.');
 
-       return redirect()->back();
+       if($request->source == 'proyectos'){
+        return redirect()->route('proyectos.index')->with('users', $users);
+        }else{
+        return redirect()->route('tareas.index'); 
+     }
     }
 
     public function show($id)
@@ -51,8 +70,6 @@ class TaskController extends Controller
     public function edit($id)
     {
         $task = Task::find($id);
-
-
 
         Session::flash('info', 'Estas en la vista de editar cadete. Ten cuidado con lo que haces ya que no se puede modificar.');
 
@@ -66,7 +83,9 @@ class TaskController extends Controller
         $task->name = $request->name;
         $task->deadline = $request->deadline;
         $task->description = $request->description;
-        $project->status = $request->status;
+        $task->status = $request->status;
+        $task->user_id = $request->user_id;
+      
 
         $task->save();
 

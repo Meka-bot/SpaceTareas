@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use App\Models\User;
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -11,7 +13,11 @@ class ProjectController extends Controller
     {
         $projects = Project::all();
 
-        return view('projects.index')->with('projects', $projects);
+        $tasks = Task::all();
+
+        $users = User::all();
+
+        return view('projects.index')->with('projects', $projects)->with('users', $users)->with('tasks', $tasks);
     }
 
     public function create()
@@ -23,15 +29,20 @@ class ProjectController extends Controller
     {
 
         $project = new Project;
+        $task = Task::all();
 
         $project->name = $request->name;
         $project->description = $request->description;
         $project->deadline = $request->deadline;
         $project->status = $request->status;
+        $project->user_id = $request->user_id;
+
+        $users = User::all();
 
         $project->save();
+        $project->users()->sync($request->user_id);
 
-        return redirect()->back();
+        return redirect()->back()->with('users', $users);
     }
 
     public function show($id)
@@ -41,11 +52,11 @@ class ProjectController extends Controller
 
     public function edit($id)
     {
-        $task = Project::find($id);
+        $project = Project::find($id);
 
         Session::flash('info', 'Estas en la vista de editar cadete. Ten cuidado con lo que haces ya que no se puede modificar.');
 
-        return view('proyecto.edit')->with('project', $task);
+        return view('proyecto.edit')->with('project', $project);
     }
 
     public function update(Request $request, $id)
