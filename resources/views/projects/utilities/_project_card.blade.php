@@ -23,7 +23,7 @@
 		<br>
 		<h15 style="font-weight:600;">Soldados asignados al Proyecto:</h15>
 		@foreach($project->users as $user)
-			<p class="mb-0">{{  $users->name  }}</p>
+			<p class="mb-0">{{  $user->name  }}</p>
 			<hr style="border-color:rgb(237,95,74,255); width:70%; text-align:left; margin-left:0">
 			
 		@endforeach

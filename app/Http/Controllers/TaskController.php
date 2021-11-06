@@ -48,6 +48,8 @@ class TaskController extends Controller
         $task->status = $request->status;
         $task->project_id = $request->project_id;
         $task->user_id = $request->user_id;
+        
+        $task->user_id_name = 
 
         $task->save();
 
